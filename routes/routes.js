@@ -4,8 +4,6 @@ const fs = require('fs');
 const note = require('../db/db.json');
 
 
-
-
 router.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/notes.html'));
 });
