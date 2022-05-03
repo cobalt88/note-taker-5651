@@ -2,6 +2,7 @@ const router = require('express').Router();
 const path = require('path');
 const fs = require('fs');
 const note = require('../db/db.json');
+const{v4:uuid} = require('uuid');
 
 
 router.get('/notes', (req, res) => {
@@ -13,18 +14,38 @@ router.get('*', (req, res) => {
 });
 
 router.get('/api/notes', (req, res) => {
-  res.send
-  console.log('/api/notes get')
+  res.json(note)
+});
+
+router.get('/api/notes:id', (req, res) => {
+  for (let i = 0; i < note.length; i++) {
+    if (note[i].id === req.params.id) {
+        res.json(note[i]);
+    }
+  }
 });
 
 router.post('/api/notes', (req, res) => {
-  res.send
-  console.log('/api/notes post')
-})
+  const newNote = { 
+    "title": req.body.title,
+    "text": req.body.text,
+    "id": uuid()
+}
+  note.push(newNote)
+  fs.writeFileSync(path.join(__dirname, '../db/db.json'),
+  JSON.stringify(note, null, 2))
+  res.json(note);
+});
 
-router.delete('/api/notes', (req, res) => {
-  res.send
-  console.log('/api/notes delete')
+router.delete('/notes/:id', (req, res) => {
+  for (let i = 0; i < note.length; i++) {
+      if (note[i].id === req.params.id) {
+          note.splice(i, 1);
+      }
+  }
+  fs.writeFileSync(path.join(__dirname, '../db/db.json'),
+  JSON.stringify(note, null, 2))
+  res.json(note);
 })
 
 module.exports = router;
