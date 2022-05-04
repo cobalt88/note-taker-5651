@@ -1,17 +1,19 @@
 const router = require('express').Router();
+const express = require('express')
 const path = require('path');
 const fs = require('fs');
 const note = require('../db/db.json');
 const{v4:uuid} = require('uuid');
+// const app = express();
+
+// app.use(express.json()); // for parsing application/json
+
 
 
 router.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/notes.html'));
 });
 
-router.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
-});
 
 router.get('/api/notes', (req, res) => {
   res.json(note)
@@ -47,5 +49,9 @@ router.delete('/notes/:id', (req, res) => {
   JSON.stringify(note, null, 2))
   res.json(note);
 })
+
+router.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
 module.exports = router;
