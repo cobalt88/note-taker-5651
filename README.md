@@ -18,6 +18,8 @@
 
 Module 11 challenge making use of Express JS and Node JS to create a simple web based note taking application.
 
+Live Application: https://notetaker-5651.herokuapp.com/ 
+
  ![Alt text](./public/assets/images/localhost_3009_notes.png)
 
  ## Installation Instructions
@@ -44,7 +46,7 @@ This application runs in-browser and therefore does not require any client-side 
 
  ## Application Tests
 
-
+The deployed version of this application does not have any active tests built into it, but feel free to build some of your own and create a pull request.
 
 
 ## license
